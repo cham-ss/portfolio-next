@@ -7,10 +7,9 @@ export type Lang = 'fr' | 'en';
 export const translations: Record<Lang, Record<string, string>> = {
   fr: {
     'nav.home': 'Accueil', 'nav.skills': 'Compétences', 'nav.projects': 'Projets', 'nav.contact': 'Contact',
-    'hero.tag': 'Disponible pour des missions',
     'hero.greetingLine': 'Bonjour, je suis',
     'hero.role': 'Senior',
-    'hero.desc': "Technicien polyvalent formé en Administration Systèmes & Réseaux, avec des bases en développement et génie logiciel. Capable de prendre en charge des projets techniques de bout en bout, quelle que soit la stack ou l'environnement.",
+    'hero.desc': "J'aime résoudre des problèmes à tous les niveaux d'un système, du réseau jusqu'à l'interface. Mon parcours couvre l'administration systèmes, la sécurité et le développement, ce qui me permet d'intervenir là où le projet en a besoin.",
     'hero.btnProjects': 'Voir mes projets',
     'hero.btnContact': 'Me contacter',
     'skills.title': 'Mes Compétences',
@@ -34,10 +33,9 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
   en: {
     'nav.home': 'Home', 'nav.skills': 'Skills', 'nav.projects': 'Projects', 'nav.contact': 'Contact',
-    'hero.tag': 'Available for new opportunities',
     'hero.greetingLine': "Hello, I'm",
     'hero.role': 'Senior',
-    'hero.desc': "Versatile technician trained in Systems & Network Administration, with a solid foundation in software development. Able to handle technical projects end-to-end, regardless of the stack or environment.",
+    'hero.desc': "I enjoy solving problems at every level of a system, from the network to the interface. My background spans system administration, security, and development, allowing me to step in wherever the project needs me.",
     'hero.btnProjects': 'View my projects',
     'hero.btnContact': 'Contact me',
     'skills.title': 'My Skills',

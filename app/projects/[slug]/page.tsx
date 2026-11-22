@@ -3,11 +3,15 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import ScrollTopButton from '@/components/ScrollTopButton';
 import LangSwitcher from '@/components/LangSwitcher';
-import { getProjectBySlug } from '@/lib/projects';
+import { projects, getProjectBySlug } from '@/data/projects';
+
+export function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
+}
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) notFound();
 
@@ -22,22 +26,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             </Link>
 
             <div className="project-detail">
-              {project.image_url && (
+              {project.image && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={project.image_url} alt={project.title} className="project-detail-image" />
+                <img src={project.image} alt={project.title} className="project-detail-image" />
               )}
 
               <div className="project-detail-meta">
-                <span className="admin-category-tag">{project.category}</span>
-                {project.project_date && (
+                <span className="project-tag">{project.category}</span>
+                {project.date && (
                   <span className="project-detail-date">
-                    <i className="fas fa-calendar" /> {new Date(project.project_date).toLocaleDateString('fr-FR')}
+                    <i className="fas fa-calendar" /> {new Date(project.date).toLocaleDateString('fr-FR')}
                   </span>
                 )}
               </div>
 
               <h1 className="project-detail-title">{project.title}</h1>
-              <p className="project-detail-short">{project.short_description}</p>
+              <p className="project-detail-short">{project.shortDescription}</p>
 
               {project.technologies.length > 0 && (
                 <div className="project-tags" style={{ marginBottom: 24 }}>
@@ -50,18 +54,18 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               <div className="project-detail-links">
-                {project.github_url && (
-                  <a className="btn btn-secondary" href={project.github_url} target="_blank" rel="noreferrer">
+                {project.githubUrl && (
+                  <a className="btn btn-secondary" href={project.githubUrl} target="_blank" rel="noreferrer">
                     <i className="fab fa-github" /> Code source
                   </a>
                 )}
-                {project.demo_url && (
-                  <a className="btn btn-primary" href={project.demo_url} target="_blank" rel="noreferrer">
+                {project.demoUrl && (
+                  <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
                     <i className="fas fa-external-link-alt" /> Live Demo
                   </a>
                 )}
-                {project.documentation_url && (
-                  <a className="btn btn-secondary" href={project.documentation_url} target="_blank" rel="noreferrer">
+                {project.documentationUrl && (
+                  <a className="btn btn-secondary" href={project.documentationUrl} target="_blank" rel="noreferrer">
                     <i className="fas fa-book" /> Documentation
                   </a>
                 )}

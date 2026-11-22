@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n';
-import type { ProjectRow } from '@/lib/supabase/types';
+import { projects } from '@/data/projects';
 import Reveal from './Reveal';
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -13,11 +13,7 @@ const CATEGORY_ICONS: Record<string, string> = {
   design: 'fas fa-palette',
 };
 
-interface ProjectsProps {
-  projects: ProjectRow[];
-}
-
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects() {
   const { t } = useLanguage();
 
   return (
@@ -30,37 +26,36 @@ export default function Projects({ projects }: ProjectsProps) {
         </div>
 
         {projects.length === 0 ? (
-          <div className="admin-empty-state" style={{ background: 'transparent', border: 'none' }}>
-            <i className="fas fa-folder-open" />
-            <p>Aucun projet publié pour le moment.</p>
-          </div>
+          <p style={{ textAlign: 'center', color: 'var(--text-dim)', padding: '40px 0' }}>
+            Aucun projet pour le moment.
+          </p>
         ) : (
           <div className="projects-grid">
             {projects.map((project) => (
-              <Reveal key={project.id} className="project-card" as="div" data-category={project.category}>
+              <Reveal key={project.slug} className="project-card" as="div" data-category={project.category}>
                 {project.featured && (
                   <div className="project-featured-badge">
                     <i className="fas fa-star" /> Featured
                   </div>
                 )}
                 <div className="project-thumb">
-                  {project.image_url ? (
+                  {project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={project.image_url} alt={project.title} className="project-thumb-img" />
+                    <img src={project.image} alt={project.title} className="project-thumb-img" />
                   ) : (
                     <>
                       <div className="project-thumb-gradient" />
-                      <i className={`${CATEGORY_ICONS[project.category] || 'fas fa-diagram-project'} project-thumb-icon`} />
+                      <i className={`${CATEGORY_ICONS[project.category]} project-thumb-icon`} />
                     </>
                   )}
                   <div className="project-overlay">
-                    {project.github_url && (
-                      <a href={project.github_url} target="_blank" rel="noreferrer" title="Code source">
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noreferrer" title="Code source">
                         <i className="fab fa-github" />
                       </a>
                     )}
-                    {project.demo_url && (
-                      <a href={project.demo_url} target="_blank" rel="noreferrer" title="Voir en live">
+                    {project.demoUrl && (
+                      <a href={project.demoUrl} target="_blank" rel="noreferrer" title="Voir en live">
                         <i className="fas fa-external-link-alt" />
                       </a>
                     )}
@@ -80,7 +75,7 @@ export default function Projects({ projects }: ProjectsProps) {
                   <h3 className="project-title">
                     <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                   </h3>
-                  <p className="project-desc">{project.short_description}</p>
+                  <p className="project-desc">{project.shortDescription}</p>
                 </div>
               </Reveal>
             ))}

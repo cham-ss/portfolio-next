@@ -5,18 +5,15 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import ScrollTopButton from '@/components/ScrollTopButton';
 import LangSwitcher from '@/components/LangSwitcher';
-import { getPublishedProjects } from '@/lib/projects';
 
-export default async function HomePage() {
-  const projects = await getPublishedProjects();
-
+export default function HomePage() {
   return (
     <>
       <Header />
       <main id="pageContainer">
         <Hero />
         <Skills />
-        <Projects projects={projects} />
+        <Projects />
         <Contact />
       </main>
       <ScrollTopButton />

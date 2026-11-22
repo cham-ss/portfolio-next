@@ -54,7 +54,6 @@ export default function Hero() {
       <div className="page-content">
         <div className="hero">
           <div className="content">
-            <div className="hero-tag">{t('hero.tag')}</div>
             <h1>
               <span>{t('hero.greetingLine')}</span>
               <br />
